@@ -1,0 +1,30 @@
+FROM ubuntu:24.04
+
+RUN <<~~~
+apt update
+apt upgrade -y
+apt install -y \
+    build-essential \
+    make \
+    autoconf \
+    automake \
+    libwxgtk3.2-dev \
+    gettext \
+    python3 \
+    python-is-python3 \
+    cmake
+~~~
+
+RUN mkdir /var/app
+COPY . /var/app
+RUN chown -R ubuntu:ubuntu /var/app 
+
+USER ubuntu:ubuntu
+WORKDIR /var/app
+
+RUN <<~~~
+cmake -B build && \
+make -C build
+~~~
+
+ENTRYPOINT ["/bin/bash", "-c"]

@@ -1,7 +1,7 @@
 WXCONFIG ?= wx-config
 HOST=
 OPT_FLAGS += -fopenmp
-LIBS += -lgomp
+
 WXCXXFLAGS= `$(WXCONFIG) --cxxflags` -Iudis86 -Imhash/include -MMD -Wall -O2 -DNDEBUG
 WXLDFLAGS = `$(WXCONFIG) --libs` `$(WXCONFIG) --libs aui` `$(WXCONFIG) --libs core`
 #add this ldflags for WinConsole  "-Wl,--subsystem,console -mconsole" for win-debug
@@ -22,7 +22,7 @@ SOURCES= src/HexEditorGui.cpp \
 			src/HexEditorCtrl/wxHexCtrl/Tag.cpp\
 			src/HexEditorCtrl/HexEditorCtrlGui.cpp\
 			src/HexEditorFrame.cpp
-LIBS += udis86/libudis86/.libs/libudis86.a mhash/lib/.libs/libmhash.a
+
 OBJECTS=$(SOURCES:.cpp=.o)
 DEPENDS=$(OBJECTS:.o=.d)
 LANGUAGEDIRS=`ls -l ./locale | grep ^d | sed s/.*\ //g;`
